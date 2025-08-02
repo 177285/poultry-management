@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - ChickSmart</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-section { margin-bottom: 30px; }
+    .stats { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+    .stats .card {
+      background-color: #f0f4f8;
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1 1 200px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 1.1em;
+    }
+    .alerts {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ffeeba;
+    }
+    .quick-actions a {
+      display: inline-block;
+      margin-right: 20px;
+      color: #2980b9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .profile-summary {
+      margin-top: 30px;
+      background-color: #e6f7ff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body onload="checkAccess()">
+  <div class="container">
+    <h2>🛡️ Admin Dashboard</h2>
+
+    <!-- Quick Stats -->
+    <div class="admin-section stats">
+      <div class="card">🐔 Birds: 320</div>
+      <div class="card">🥚 Eggs Today: 480</div>
+      <div class="card">🌾 Feed Level: 72%</div>
+      <div class="card">☠️ Mortality: 2 Birds</div>
+    </div>
+
+    <!-- Alerts -->
+    <div class="admin-section alerts">
+      <strong>⚠️ Alerts:</strong>
+      <ul>
+        <li>🔔 Feed stock is below 10% — restock immediately.</li>
+        <li>📅 Vaccination due in 2 days.</li>
+        <li>📉 Egg production dropped 12% from last week.</li>
+      </ul>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="admin-section">
+      <h3>⚡ Quick Actions</h3>
+      <div class="quick-actions">
+        <a href="user-management.html">👥 Manage Users</a>
+        <a href="reports.html">📈 View Reports</a>
+        <a href="inventory.html">📦 Inventory</a>
+      </div>
+    </div>
+
+    <!-- Activity Log -->
+    <div class="admin-section">
+      <h3>📋 Recent Activity</h3>
+      <ul>
+        <li>✅ Admin updated feed level - 9:42 AM</li>
+        <li>📥 Exported report - 8:35 AM</li>
+        <li>👤 New user added: farmworker001 - Yesterday</li>
+      </ul>
+    </div>
+
+    <!-- Profile Summary -->
+    <div class="profile-summary">
+      <strong>👤 Logged in as:</strong> Admin | <strong>Email:</strong> admin@chicksmart.com  
+      <br><strong>Last Login:</strong> Today, 9:01 AM
+    </div>
+
+    <!-- Navigation -->
+    <nav style="margin-top: 40px;">
+      <a href="index.html">Home</a>
+      <a href="reports.html">Reports</a>
+      <a href="profile.html">Profile</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </div>
+
+  <script>
+    function checkAccess() {
+      const role = localStorage.getItem("role");
+      if (role !== "admin") {
+        alert("Access denied: Admins only.");
+        window.location.href = "dashboard.html";
+      }
+    }
+  </script>
+</body>
+</html>
