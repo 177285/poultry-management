@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - ChickSmart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>🔐 Login to ChickSmart</h2>
+    <form onsubmit="return handleLogin()" action="login.php" method="post">
+      <input type="text" id="first-name" placeholder="First Name" required>
+      <input type="text" id="last-name" placeholder="Last Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <label for="role">Login as:</label>
+      <select id="role" required>
+        <option value="">-- Select Role --</option>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <input type="submit" value="Login">
+    </form>
+
+    <!-- 👇 Sign Up Option -->
+    <div class="links" style="margin-top: 15px; text-align: center;">
+      <p>Don't have an account? <a href="signup.html">Sign Up here</a></p>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin() {
+      const role = document.getElementById("role").value;
+      const email = document.getElementById("email").value;
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+
+      localStorage.setItem("role", role);
+
+      if (role === "admin") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        window.location.href = "dashboard.html";
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
+ 
+
+
+
+
