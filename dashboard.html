@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome</h2>
+
+    <!-- Real-Time Stats -->
+    <div class="card-container">
+      <div class="card">🐔 Birds: 320</div>
+      <div class="card">🥚 Eggs Today: 480</div>
+      <div class="card">🛒 Feed Level: 72%</div>
+      <div class="card">💀 Mortality This Week: 3</div>
+    </div>
+
+    <!-- Alerts -->
+    <h3>🔔 Alerts</h3>
+    <ul>
+      <li>⚠️ Vaccine stock is low!</li>
+      <li>📅 Vaccination due tomorrow for Layer Batch #4</li>
+    </ul>
+
+    <!-- Charts -->
+    <h3>📊 Egg Production (Last 7 Days)</h3>
+    <canvas id="eggChart" height="100"></canvas>
+
+    <!-- Recent Activities -->
+    <h3>📝 Recent Activities</h3>
+    <ul>
+      <li>✔️ Feed updated - 20kg added</li>
+      <li>✔️ Collected 480 eggs</li>
+      <li>✔️ Added 50 new chicks</li>
+    </ul>
+
+    <!-- Inventory Snapshot -->
+    <h3>📦 Inventory Snapshot</h3>
+    <table>
+      <tr><th>Item</th><th>Quantity</th><th>Status</th></tr>
+      <tr><td>Feed</td><td>100 kg</td><td>✔ Available</td></tr>
+      <tr><td>Vaccine A</td><td>5 vials</td><td>⚠ Low</td></tr>
+      <tr><td>Water Additive</td><td>15 bottles</td><td>✔ OK</td></tr>
+    </table>
+
+    <!-- Daily Tasks -->
+    <h3>✅ Daily Tasks</h3>
+    <ul>
+      <li><input type="checkbox"> Feed birds at 7:00 AM</li>
+      <li><input type="checkbox"> Collect eggs</li>
+      <li><input type="checkbox"> Clean coops</li>
+      <li><input type="checkbox"> Check water tanks</li>
+    </ul>
+
+    <!-- Quick Links -->
+    <h3>📁 Quick Actions</h3>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="inventory.html">📦 Inventory</a>
+      <a href="reports.html">📄 Reports</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="login.html">🔓 Logout</a>
+    </nav>
+
+    <div style="text-align:center; margin-top: 20px;">
+      <button onclick="location.reload()">🔄 Refresh Dashboard</button>
+    </div>
+  </div>
+
+  <!-- Chart Script -->
+  <script>
+    const ctx = document.getElementById('eggChart').getContext('2d');
+    const eggChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Eggs Collected',
+          data: [420, 460, 500, 480, 470, 490, 520],
+          backgroundColor: 'rgba(46, 204, 113, 0.2)',
+          borderColor: '#27ae60',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
