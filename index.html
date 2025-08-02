@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home - ChickSmart Poultry Management</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .welcome-banner {
+      text-align: center;
+      background: #f0f8ff;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .welcome-banner img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      background: #008080;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #005f5f;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      min-width: 180px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    h3 {
+      margin-top: 30px;
+      text-align: center;
+      color: #008080;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    ul li {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+    }
+    ul li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .about, .contact {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Welcome Section -->
+    <div class="welcome-banner">
+      <img src="profile-placeholder.jpg" alt="User Photo">
+      <h1>Welcome👋</h1>
+      <p>Glad to see you back! Here's what's happening on your farm today.</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="inventory.html">📦 Inventory</a>
+      <a href="reports.html">📄 Reports</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="login.html">🚪 Logout</a>
+    </nav>
+
+   
+    <!-- Quick Access -->
+    <h3>📁 Quick Access</h3>
+    <div class="card-container">
+      <div class="card"><a href="inventory.html">➕ Add Inventory</a></div>
+      <div class="card"><a href="reports.html">⬆ Upload Report</a></div>
+      <div class="card"><a href="dashboard.html">📊 View Dashboard</a></div>
+      <div class="card"><a href="profile.html">👤 Update Profile</a></div>
+    </div>
+
+    <!-- Today's Tasks -->
+    <h3>📅 Today's Tasks</h3>
+    <ul>
+      <li><input type="checkbox"> Feed birds (7:00 AM)</li>
+      <li><input type="checkbox"> Collect eggs (10:00 AM)</li>
+      <li><input type="checkbox"> Clean coops</li>
+      <li><input type="checkbox"> Check water tanks</li>
+    </ul>
+
+    <!-- Announcements -->
+    <h3>📢 Announcements</h3>
+    <ul>
+      <li>🛠 Scheduled Maintenance: Sunday 8:00 PM</li>
+      <li>🐣 New chicks successfully added to Batch #5</li>
+    </ul>
+
+    <!-- About Section -->
+    <h3>💬 About ChickSmart</h3>
+    <p class="about">
+      ChickSmart is your smart poultry assistant. From egg tracking to stock monitoring,
+      it helps you run your farm smoothly and efficiently. Whether you're a smallholder or
+      managing a large operation, ChickSmart gives you control and insights.
+    </p>
+
+    <!-- Admin Contact -->
+    <h3>📞 Contact Admin</h3>
+    <p class="contact">
+      Email: <a href=>danielphilip@gmail.com</a><br>
+      Phone: <a href="tel:+254700123456">+254 700 123456</a>
+    </p>
+
+    <!-- Banner Image -->
+    <div style="margin-top: 30px; text-align: center;">
+      <img src="https://sdmntprwestus3.oaiusercontent.com/files/00000000-eb64-61fd-827f-845b1f8ed13f/raw?se=2025-07-22T12%3A56%3A34Z&sp=r&sv=2024-08-04&sr=b&scid=9c5f13a5-fcc7-55c5-80a3-9e7cb3c2fe97&skoid=864daabb-d06a-46b3-a747-d35075313a83&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-22T11%3A54%3A26Z&ske=2025-07-23T11%3A54%3A26Z&sks=b&skv=2024-08-04&sig=xaxwAfeoGB5cnnLwoyCKZk0ICD1fjaHc8sWDm5Hs/00%3D" alt="Poultry Banner" style="width: 100%; max-width: 700px; border-radius: 10px;">
+      <p style="font-size: 0.9em;"></p>
+    </div>
+  </div>
+</body>
+</html>
