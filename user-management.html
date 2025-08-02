@@ -1,0 +1,149 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Management - ChickSmart</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: white;
+      font-size: 12px;
+    }
+    .badge-admin { background-color: #e74c3c; }
+    .badge-user { background-color: #3498db; }
+    .badge-staff { background-color: #27ae60; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .form-section {
+      margin-top: 30px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .form-section input,
+    .form-section select {
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 100%;
+    }
+
+    .search-bar {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .search-bar input,
+    .search-bar select {
+      padding: 8px;
+    }
+
+    .actions button {
+      margin-right: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .actions button.edit { background-color: #3498db; color: white; }
+    .actions button.deactivate { background-color: #e67e22; color: white; }
+  </style>
+</head>
+<body onload="checkAccess()">
+  <div class="container">
+    <h2>👥 User Management</h2>
+
+    <!-- 🔍 Search and Filter -->
+    <div class="search-bar">
+      <input type="text" placeholder="Search by name or email...">
+      <select>
+        <option>All Roles</option>
+        <option>Admin</option>
+        <option>User</option>
+        <option>Staff</option>
+      </select>
+    </div>
+
+    <!-- 📋 User List Table -->
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <td>Jane Doe</td>
+        <td>jane@example.com</td>
+        <td><span class="badge badge-admin">Admin</span></td>
+        <td>Active</td>
+        <td class="actions">
+          <button class="edit">Edit</button>
+          <button class="deactivate">Deactivate</button>
+        </td>
+      </tr>
+      <tr>
+        <td>John Farmer</td>
+        <td>john@example.com</td>
+        <td><span class="badge badge-user">User</span></td>
+        <td>Active</td>
+        <td class="actions">
+          <button class="edit">Edit</button>
+          <button class="deactivate">Deactivate</button>
+        </td>
+      </tr>
+    </table>
+
+    <!-- ➕ Add New User -->
+    <div class="form-section">
+      <h3>Add New User</h3>
+      <form onsubmit="alert('User added (simulation).'); return false;">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Username" required>
+        <select required>
+          <option value="">Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+          <option value="staff">Staff</option>
+        </select>
+        <input type="password" placeholder="Temporary Password" required>
+        <input type="submit" value="Add User">
+      </form>
+    </div>
+
+    <!-- 🔙 Navigation -->
+    <nav style="margin-top: 40px;">
+      <a href="admin-dashboard.html">← Back to Admin Dashboard</a>
+    </nav>
+  </div>
+
+  <script>
+    function checkAccess() {
+      const role = localStorage.getItem("role");
+      if (role !== "admin") {
+        alert("Access denied: Admins only.");
+        window.location.href = "dashboard.html";
+      }
+    }
+  </script>
+</body>
+</html>
