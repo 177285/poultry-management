@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .low-stock { background-color: #ffe6e6; }
+    .expired { background-color: #ffcccc; color: #900; }
+
+    .filter-bar, .action-buttons {
+      margin: 15px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .summary { font-weight: bold; margin-bottom: 10px; }
+
+    .notes { font-size: 14px; color: #444; margin-top: 20px; }
+
+    #addFormModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center; align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 90%; max-width: 400px;
+      border-radius: 10px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .preview-img {
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📦 Inventory Management</h2>
+
+    <!-- Filter/Search -->
+    <div class="filter-bar">
+      <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="🔍 Search item...">
+      <select id="categoryFilter" onchange="filterByCategory()">
+        <option value="">All Categories</option>
+        <option value="Feed">Feed</option>
+        <option value="Medicine">Medicine</option>
+        <option value="Equipment">Equipment</option>
+      </select>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary" id="summaryStats">
+      Total Items: 3 | Low Stock: 1 | Expired: 1
+    </div>
+
+    <!-- Inventory Table -->
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Category</th>
+          <th>Expiry Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryBody">
+        <tr>
+          <td><img src="uploads/vaccine.jpg" alt="Vaccine" class="preview-img"></td>
+          <td>Newcastle Vaccine</td>
+          <td>15</td>
+          <td>Medicine</td>
+          <td>2025-10-15</td>
+          <td></td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr class="low-stock">
+          <td><img src="uploads/feed.jpg" alt="Feed" class="preview-img"></td>
+          <td>Layer Mash</td>
+          <td>5</td>
+          <td>Feed</td>
+          <td>2025-08-05</td>
+          <td>Low Stock</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr class="expired">
+          <td><img src="uploads/syringe.jpg" alt="Syringe" class="preview-img"></td>
+          <td>Vaccination Syringe</td>
+          <td>20</td>
+          <td>Equipment</td>
+          <td>2024-12-31</td>
+          <td>Expired</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button onclick="openAddForm()">➕ Add New Item</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav style="margin-top: 30px;">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="reports.html">Reports</a>
+      <a href="profile.html">Profile</a>
+      <a href="logout.php">Logout</a>
+    </nav>
+  </div>
+
+  <!-- Add Item Modal with Form -->
+  <div id="addFormModal">
+    <form action="save_inventory.php" method="POST" enctype="multipart/form-data">
+      <div class="modal-content">
+        <h3>Add Inventory Item</h3>
+        <input type="text" name="item_name" placeholder="Item Name" required>
+        <input type="text" name="quantity" placeholder="Quantity (e.g. 10 kg)" required>
+        <select name="category" required>
+          <option value="">Select Category</option>
+          <option value="Feed">Feed</option>
+          <option value="Medicine">Medicine</option>
+          <option value="Equipment">Equipment</option>
+        </select>
+        <input type="date" name="expiry_date" required>
+        <input type="file" name="image" accept="image/*" required>
+
+        <button type="submit">Save Item</button>
+        <button type="button" onclick="closeAddForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function filterTable() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      document.querySelectorAll("#inventoryTable tbody tr").forEach(row => {
+        const name = row.children[1].textContent.toLowerCase();
+        row.style.display = name.includes(input) ? "" : "none";
+      });
+    }
+
+    function filterByCategory() {
+      const cat = document.getElementById("categoryFilter").value;
+      document.querySelectorAll("#inventoryTable tbody tr").forEach(row => {
+        const rowCat = row.children[3].textContent;
+        row.style.display = (cat === "" || cat === rowCat) ? "" : "none";
+      });
+    }
+
+    function openAddForm() {
+      document.getElementById("addFormModal").style.display = "flex";
+    }
+
+    function closeAddForm() {
+      document.getElementById("addFormModal").style.display = "none";
+      document.querySelector('#addFormModal form').reset();
+    }
+  </script>
+</body>
+</html>
