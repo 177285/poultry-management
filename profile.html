@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile - ChickSmart</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .profile-header img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+    }
+
+    .profile-actions {
+      margin-top: 20px;
+    }
+
+    .form-section {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .form-section h3 {
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .notification-group label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    button {
+      padding: 8px 15px;
+      background: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .summary-cards {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .summary-card {
+      flex: 1 1 200px;
+      background: #eef6fc;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>👤 User Profile</h2>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <img id="profileImage" src="default-profile.jpg" alt="Profile Photo">
+      <div>
+        <p><strong>Name:</strong> Jane Doe</p>
+        <p><strong>Email:</strong> janedoe@example.com</p>
+        <p><strong>Role:</strong> Admin</p>
+        <p><strong>Farm:</strong> Sunrise Poultry</p>
+      </div>
+    </div>
+
+    <!-- Summary Stats -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <h4>Last Login</h4>
+        <p>2025-07-10 08:15 AM</p>
+      </div>
+      <div class="summary-card">
+        <h4>Reports Submitted</h4>
+        <p>14</p>
+      </div>
+      <div class="summary-card">
+        <h4>Inventory Updates</h4>
+        <p>8</p>
+      </div>
+      <div class="summary-card">
+        <h4>Role Status</h4>
+        <p>🛡️ Admin Access</p>
+      </div>
+    </div>
+
+    <!-- Edit Profile Form -->
+    <div class="form-section">
+      <h3>✏️ Edit Profile</h3>
+      <div class="form-group">
+        <label for="editName">Full Name</label>
+        <input type="text" id="editName" value="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label for="editEmail">Email</label>
+        <input type="email" id="editEmail" value="janedoe@example.com">
+      </div>
+      <div class="form-group">
+        <label for="editRole">Role</label>
+        <input type="text" id="editRole" value="Admin">
+      </div>
+      <div class="form-group">
+        <label for="editPhoto">Change Profile Photo</label>
+        <input type="file" id="editPhoto" accept="image/*" onchange="previewImage(event)">
+      </div>
+      <button onclick="alert('Profile updated successfully!')">Save Changes</button>
+    </div>
+
+    <!-- Change Password -->
+    <div class="form-section">
+      <h3>🔐 Change Password</h3>
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword">
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" id="confirmPassword">
+      </div>
+      <button onclick="changePassword()">Update Password</button>
+    </div>
+
+    <!-- Notification Preferences -->
+    <div class="form-section">
+      <h3>🔔 Notification Preferences</h3>
+      <div class="notification-group">
+        <label><input type="checkbox" checked> Email Alerts</label>
+        <label><input type="checkbox"> SMS Reminders</label>
+        <label><input type="checkbox" checked> Weekly Reports</label>
+      </div>
+    </div>
+
+    <!-- Activity Log Download -->
+    <div class="form-section">
+      <h3>📥 My Activity Log</h3>
+      <button onclick="downloadLog()">Download Activity Log (CSV)</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav style="margin-top: 30px;">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="reports.html">Reports</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </div>
+
+  <script>
+    // Preview uploaded profile image
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const output = document.getElementById('profileImage');
+        output.src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Change password handler
+    function changePassword() {
+      const current = document.getElementById('currentPassword').value;
+      const newPass = document.getElementById('newPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (newPass !== confirm) {
+        alert("❌ Passwords do not match.");
+        return;
+      }
+      if (newPass.length < 6) {
+        alert("⚠ Password should be at least 6 characters.");
+        return;
+      }
+
+      alert("✅ Password updated successfully!");
+    }
+
+    // Download simulated activity log
+    function downloadLog() {
+      const csv = `Date,Activity,Details
+2025-07-10,Report Submitted,Weekly Report #14
+2025-07-09,Inventory Update,Feed added: 200kg
+2025-07-08,Password Change,Success
+`;
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "my_activity_log.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
